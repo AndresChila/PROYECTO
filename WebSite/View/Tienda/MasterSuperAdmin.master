@@ -1,0 +1,143 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="~/Controller/Tienda/MasterSuperAdmin.master.cs" Inherits="View_Tienda_MasterTienda" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>SCA: Superadmin</title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+        }
+        .auto-style2 {
+            width: 272px;
+            color: #33CCFF;
+            background-color: #33CCFF;
+        }
+        .auto-style3 {
+            height: 248px;
+            width: 629px;
+        }
+        .auto-style4 {
+            width: 100%;
+            height: 260px;
+        }
+        .auto-style5 {
+            text-align: center;
+            width: 260px;
+        }
+        .auto-style7 {
+            text-align: center;
+            width: 629px;
+            height: 29px;
+            background-color: #000099;
+        }
+        .auto-style8 {
+            text-align: center;
+            width: 260px;
+            background-color: #0066CC;
+        }
+        .auto-style9 {
+            color: #000000;
+        }
+        .auto-style10 {
+            text-decoration: none;
+        }
+        .auto-style11 {
+            text-align: center;
+            width: 260px;
+            height: 24px;
+        }
+        .auto-style12 {
+            text-align: center;
+            width: 260px;
+            height: 5px;
+        }
+        .auto-style13 {
+            text-align: center;
+            width: 260px;
+            height: 25px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <table class="auto-style1">
+            <tr>
+                <td class="auto-style2" rowspan="2">
+                    <table class="auto-style4">
+                        <tr>
+                            <td class="auto-style8">
+                                <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="XX-Large" Text="SUPERADMIN" CssClass="auto-style9"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style12">
+                                <asp:Label ID="Label_Usuario" runat="server" Font-Size="Medium" CssClass="auto-style9"></asp:Label>
+                                <br />
+                                <br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style5">
+                                <asp:Label ID="L_Sede" runat="server" CssClass="auto-style9"></asp:Label>
+                                </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style5">
+                                <asp:LinkButton ID="LinkButton2" runat="server" Font-Names="Engravers MT" Font-Size="Large" ForeColor="Black" OnClick="LinkButton2_Click" CssClass="auto-style10">Agregar Sede</asp:LinkButton>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style5">
+                                <asp:LinkButton ID="LinkButton3" runat="server" Font-Names="Engravers MT" Font-Size="Large" ForeColor="Black" CssClass="auto-style10" OnClick="LinkButton3_Click">CRUD Admin</asp:LinkButton>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style5">
+                                <asp:LinkButton ID="LinkButton4" runat="server" Font-Names="Engravers MT" Font-Size="Large" ForeColor="Black" OnClick="LinkButton4_Click" CssClass="auto-style10">CRUD Producto</asp:LinkButton>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style11">
+                                <asp:LinkButton ID="LinkButton5" runat="server" Font-Names="Engravers MT" Font-Size="Large" ForeColor="Black" CssClass="auto-style10" OnClick="LinkButton5_Click">Conflictos</asp:LinkButton>
+                                <asp:Label ID="L_c1" runat="server" BackColor="Red" ForeColor="Black"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style13">
+                                <asp:LinkButton ID="LinkButton6" runat="server" Font-Names="Engravers MT" Font-Size="Large" ForeColor="Black" OnClick="LinkButton6_Click" CssClass="auto-style10">Asignar </asp:LinkButton>
+                                <asp:Label ID="L_c" runat="server" BackColor="Red" ForeColor="Black"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style5">
+                                &nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style5">
+                                <asp:Button ID="B_CerrarSesion" runat="server" Text="O" Width="23px" OnClick="B_CerrarSesion_Click" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="auto-style7">
+                    <asp:Label ID="Label3" runat="server" Font-Bold="False" Font-Names="Papyrus" ForeColor="White" Text="SCA"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style3"> <asp:ContentPlaceHolder id="ContentPlaceHolder2" runat="server">
+        
+                </asp:ContentPlaceHolder></td>
+            </tr>
+        </table>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
