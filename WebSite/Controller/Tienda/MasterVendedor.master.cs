@@ -54,10 +54,7 @@ public partial class View_Tienda_MasterVendedor : System.Web.UI.MasterPage
     {
         Response.Redirect("NuevoAbono.aspx");
     }
-
-
-
-
+    
     void cerrarSesion()
     {
         Session["clave"] = null;
