@@ -134,7 +134,7 @@ public partial class View_Tienda_NuevaVenta : System.Web.UI.Page
             {
                 precioTotal = precioTotal + p.ValorTotal;
             }
-            Response.Write("El valor de esta venta es de:" + precioTotal);
+            Response.Write("<script>window.alert('El valor de esta venta es de:" + precioTotal+"';</script>"); 
             Session["valorVenta"] = Convert.ToString(precioTotal);
 
         //}

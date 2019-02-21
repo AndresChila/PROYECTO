@@ -56,12 +56,13 @@
                         <br />
                         <asp:Label ID="Label2" runat="server" CssClass="auto-style9" ForeColor="White" Text="Ingrese Cedula"></asp:Label>
                         <br />
-                        <asp:TextBox ID="TB_Cedula" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TB_Cedula" runat="server" MaxLength="10"></asp:TextBox>
                         <br />
                         <asp:Label ID="Label3" runat="server" CssClass="auto-style9" ForeColor="White" Text="Ingresa Contraseña"></asp:Label>
                         <br />
                         <asp:TextBox ID="TB_Clave" runat="server" TextMode="Password"></asp:TextBox>
                         <br />
+                        <asp:Label ID="L_NoEntra" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                         <br />
             <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click" CssClass="auto-style9" ForeColor="White">Olvide la contraseña</asp:LinkButton>
                         <br />

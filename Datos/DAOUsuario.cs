@@ -220,7 +220,7 @@ namespace Datos
             {
                 NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_editar_eliminacion", conection);
                 dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                dataAdapter.SelectCommand.Parameters.Add("_cedula", NpgsqlDbType.Integer).Value = cedula;
+                dataAdapter.SelectCommand.Parameters.Add("_cedula", NpgsqlDbType.Integer).Value = int.Parse(cedula);
 
 
                 conection.Open();
@@ -228,6 +228,7 @@ namespace Datos
             }
             catch (Exception Ex)
             {
+                if(Ex.Message != "Tipo de almacenamiento no válido: DBNull.")
                 throw Ex;
             }
             finally
@@ -303,6 +304,7 @@ namespace Datos
             }
             catch (Exception Ex)
             {
+                if(Ex.Message != "Tipo de almacenamiento no válido: DBNull.")
                 throw Ex;
             }
             finally
@@ -2310,7 +2312,7 @@ namespace Datos
             {
                 NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_editar_reingresar", conection);
                 dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                dataAdapter.SelectCommand.Parameters.Add("_cedula", NpgsqlDbType.Integer).Value = cedula;
+                dataAdapter.SelectCommand.Parameters.Add("_cedula", NpgsqlDbType.Integer).Value = int.Parse(cedula);
 
 
                 conection.Open();
@@ -2318,6 +2320,7 @@ namespace Datos
             }
             catch (Exception Ex)
             {
+                if(Ex.Message != "Tipo de almacenamiento no válido: DBNull.")
                 throw Ex;
             }
             finally

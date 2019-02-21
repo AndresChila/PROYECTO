@@ -215,7 +215,7 @@ public class DAOUsuario
         {
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_editar_eliminacion", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-            dataAdapter.SelectCommand.Parameters.Add("_cedula", NpgsqlDbType.Integer).Value = cedula;
+            dataAdapter.SelectCommand.Parameters.Add("_cedula", NpgsqlDbType.Integer).Value = int.Parse(cedula);
 
 
             conection.Open();
@@ -223,6 +223,7 @@ public class DAOUsuario
         }
         catch (Exception Ex)
         {
+            if(Ex.Message != "Tipo de almacenamiento no válido: DBNull.")
             throw Ex;
         }
         finally
@@ -298,6 +299,7 @@ public class DAOUsuario
         }
         catch (Exception Ex)
         {
+            if(Ex.Message != "Tipo de almacenamiento no válido: DBNull.")
             throw Ex;
         }
         finally
@@ -319,7 +321,7 @@ public class DAOUsuario
         {
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("seguridad.f_loggin", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-            dataAdapter.SelectCommand.Parameters.Add("_cedula", NpgsqlDbType.Integer).Value = Convert.ToInt32(cedula);
+            dataAdapter.SelectCommand.Parameters.Add("_cedula", NpgsqlDbType.Integer).Value = int.Parse(cedula);
             dataAdapter.SelectCommand.Parameters.Add("_clave", NpgsqlDbType.Varchar, 100).Value = clave;
             conection.Open();
             dataAdapter.Fill(Usuario);
@@ -2308,7 +2310,7 @@ public class DAOUsuario
         {
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_editar_reingresar", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-            dataAdapter.SelectCommand.Parameters.Add("_cedula", NpgsqlDbType.Integer).Value = cedula;
+            dataAdapter.SelectCommand.Parameters.Add("_cedula", NpgsqlDbType.Integer).Value = int.Parse(cedula);
 
 
             conection.Open();

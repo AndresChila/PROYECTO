@@ -12,14 +12,13 @@ namespace Logica
         {
 
         }
-        public string validarSession(string nombre, string clave, string rol)
+        public string validarSessionNombreClaveRol(string nombre, string clave, string rol)
         {
-            if(nombre == null || clave == null || rol == null)
+            if(nombre == null || clave== null || rol == null)
             {
                 return ("../Login-Rec/NuevoLogin.aspx");
             }
-            
-            return nombre;
+            return "CRUDCliente.aspx";
         }
     }
 }
