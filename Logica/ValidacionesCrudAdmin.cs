@@ -52,9 +52,7 @@ namespace Logica
             }
 
         }
-
-
-
+        
         public bool validarLlenoAgregar(string cedula, string nombre, string clave, string direccion, string telefono, string correo)
         {
             if (cedula == "" || nombre == "" || clave == "" || direccion == "" || telefono == "" || correo == "")
@@ -68,6 +66,7 @@ namespace Logica
                 return true;
             }
         }
+
         public bool validarCaractNombre(string nombre)
         {
             bool resultadoNombre = Regex.IsMatch(nombre, @"^[a-zA-Z]+$");
@@ -81,6 +80,7 @@ namespace Logica
                 return false;
             }
         }
+
         public bool validarNumeros(string num)
         {
             try
@@ -94,6 +94,7 @@ namespace Logica
                 return false;
             }
         }
+
         public bool validarCedula(string cedulallega)
         {
             DataTable cedula = new DataTable();
@@ -111,6 +112,7 @@ namespace Logica
             return true;
 
         }
+
         public bool validarAdmin(string sedeSeleccionada)
         {
             DataTable sede = new DataTable();
@@ -127,6 +129,7 @@ namespace Logica
             }
             return true;
         }
+
         public bool validaralgocedula()
         {
             if (usuario.Cedula <= 0)
@@ -207,10 +210,12 @@ namespace Logica
             }
             return mensaje;
         }
+
         public string devuelvemensaje()
         {
             return mensaje;
         }
+
         bool validarLlenoEditar()
         {
             if (cedulae == "" || nombree == "" || clavee == "" || direccione == "" || telefonoe == "" || correoe == "")

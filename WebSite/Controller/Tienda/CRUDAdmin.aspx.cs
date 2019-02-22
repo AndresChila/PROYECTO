@@ -55,8 +55,6 @@ public partial class View_Tienda_CRUDAdmin : System.Web.UI.Page
 
     }
     
-
-
     protected void B_Actualizar_Click(object sender, EventArgs e)
     {
         accion = "editar";
@@ -148,6 +146,7 @@ public partial class View_Tienda_CRUDAdmin : System.Web.UI.Page
     {
         this.limpiarEditar();
     }
+
     public void traerEditar(Usuario u)
     {
         TB_Cedula0.Text = u.Cedula.ToString();
