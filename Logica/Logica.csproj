@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgregarProductos.cs" />
+    <Compile Include="AgregarSede0.cs" />
     <Compile Include="BuscarCliente.cs" />
     <Compile Include="CoreUser.cs" />
     <Compile Include="LlenarGridViews.cs" />

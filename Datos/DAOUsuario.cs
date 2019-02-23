@@ -2349,6 +2349,7 @@ namespace Datos
             }
             catch (Exception Ex)
             {
+                if(Ex.Message != "Invalid storage type: DBNull.")
                 throw Ex;
             }
             finally

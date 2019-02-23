@@ -102,13 +102,6 @@ public partial class View_Tienda_CRUDAdmin : System.Web.UI.Page
         TB_Correo.Text = "";
     }
 
-    
-
-    protected void D_Sedes_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-    }
-
     protected void GV_Productos_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GV_Productos.PageIndex = e.NewPageIndex;
