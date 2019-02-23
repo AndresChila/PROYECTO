@@ -11,18 +11,11 @@ public partial class View_Tienda_MasterTienda : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        if (Session["user_id"] == null || Session["clave"] == null || Convert.ToInt32(Session["rol_id"]) != 1)
-        {
-            this.cerrarSesion();
-            Response.Redirect("../Login-Rec/NuevoLogin.aspx");
-        }
-        else
-        {
-            Label_Usuario.Text = Session["nombre"].ToString();
-            L_Sede.Text = Session["sede"].ToString();
-        }
-
+        SuperAdmin superAdmin = new SuperAdmin();
+        Response.Redirect(superAdmin.validarSession(Session["user_id"].ToString(), Session["clave"].ToString(), Convert.ToInt32(Session["rol_id"])));
+        
+        Label_Usuario.Text = Session["nombre"].ToString();
+        L_Sede.Text = Session["sede"].ToString();
         this.notificaciones();
         this.notificaciones2();
     }
@@ -57,17 +50,7 @@ public partial class View_Tienda_MasterTienda : System.Web.UI.MasterPage
         this.cerrarSesion();
     }
 
-    void cerrarSesion()
-    {
-        Session["clave"] = null;
-        Session["user_id"] = null;
-        Session["nombre_rol"] = null;
-        Session["nombre"] = null;
-        Session["sede"] = null;
-        Session["rol_id"] = null;
-        Response.Cache.SetNoStore();
-        Response.Redirect("../Login-Rec/NuevoLogin.aspx");
-    }
+ 
     
     void notificaciones()
     {
@@ -100,5 +83,17 @@ public partial class View_Tienda_MasterTienda : System.Web.UI.MasterPage
     protected void LinkButton5_Click(object sender, EventArgs e)
     {
         Response.Redirect("Conflictos.aspx");
+    }
+
+    void cerrarSesion()
+    {
+        Session["clave"] = null;
+        Session["user_id"] = null;
+        Session["nombre_rol"] = null;
+        Session["nombre"] = null;
+        Session["sede"] = null;
+        Session["rol_id"] = null;
+        Response.Cache.SetNoStore();
+        Response.Redirect("../Login-Rec/NuevoLogin.aspx");
     }
 }

@@ -12,7 +12,7 @@ public partial class View_NuevoLogin : System.Web.UI.Page
 { 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        this.cerrarSesion();
     }
 
     protected void LB_Recuperar_Click(object sender, EventArgs e)
@@ -51,5 +51,16 @@ public partial class View_NuevoLogin : System.Web.UI.Page
     protected void LinkButton1_Click(object sender, EventArgs e)
     {
         Response.Redirect("GenerarToken.aspx");
+    }
+
+    void cerrarSesion()
+    {
+        Session["clave"] = null;
+        Session["user_id"] = null;
+        Session["nombre_rol"] = null;
+        Session["nombre"] = null;
+        Session["sede"] = null;
+        Session["rol_id"] = null;
+        Response.Cache.SetNoStore();        
     }
 }

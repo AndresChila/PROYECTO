@@ -6,15 +6,22 @@ using System.Threading.Tasks;
 
 namespace Logica
 {
-    class SuperAdmin
+    public class SuperAdmin
     {
         public SuperAdmin()
         {
 
         }
-        public void validarSession(string user, string clave, int rol_id)
+        public string validarSession(string user, string clave, int rol_id)
         {
-
+            if (user == null || clave == null || rol_id != 1)
+            {
+                return "../Login-Rec/NuevoLogin.aspx";
+            }
+            else
+            {
+                return "../Tienda/AgregarSede.aspx";
+            }
         }
     }
 }

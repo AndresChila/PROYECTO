@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Datos;
+using Logica;
 
 public partial class View_Tienda_CRUDProducto : System.Web.UI.Page
 {
@@ -22,85 +23,16 @@ public partial class View_Tienda_CRUDProducto : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        Session["idproducto"] = null;
     }
 
     protected void B_AgregarProducto_Click(object sender, EventArgs e)
     {
-        if (validarLlenoAgregar() == true)
-        {
-            if (validarNumeros(TB_Cantidad.Text) == true)
-            {
-                if (validarNumeros(TB_Precio.Text) == true)
-                {
-                    DAOUsuario dAO = new DAOUsuario();
-                    Producto producto = new Producto();
-                    Producto producto2 = new Producto();
-                    producto.Referencia = TB_ReferenciaProducto.Text;
-                    producto.Cantidad = Convert.ToInt64(TB_Cantidad.Text);
-                    producto.Precio = Convert.ToDouble(TB_Precio.Text);
-                    producto.Talla = Convert.ToDouble(DL_Tallas.SelectedValue);
-                    if(producto.Precio <= 0 || producto.Cantidad <= 0)
-                    {
-#pragma warning disable CS0618 // Type or member is obsolete
-                        RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('Ingrese un valor mayor a cero.');</script>");
-#pragma warning restore CS0618 // Type or member is obsolete
-                        return;
-                    }
-
-                    producto2.Referencia = TB_ReferenciaProducto.Text;
-                    producto2.Precio = Convert.ToDouble(TB_Precio.Text);
-                    producto2.Talla = Convert.ToDouble(DL_Tallas.SelectedValue);
-                    List<string> referencias = dAO.ReferenciasProducto();
-                    List<Producto> referencias2 = new List<Producto>();
-                    referencias2 = dAO.pruebaaa();
-
-                    if (referencias2.Contains(producto2))
-                    {
-#pragma warning disable CS0618 // Type or member is obsolete
-                        RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('Este producto ya esta registrado. Si desea añadir mas elementos de este producto, dirijase a la seccion de actualizar un producto.');</script>");
-#pragma warning restore CS0618 // Type or member is obsolete
-                    }
-                    else
-                    {
-                        //-------------------VALIDACIONES AQUI ANTES DE ENVIARLO------------------------//
-                        //if (referencias.Contains(producto.ReferenciaProducto))
-                        //{
-                        dAO.crearProducto(producto);
-                        
-                        GV_Productos.DataBind();
-                        TB_ReferenciaProducto.Text = "";
-                        TB_Precio.Text = "";
-                        TB_Cantidad.Text = "";
-                        DL_Tallas.SelectedIndex = 0;
-#pragma warning disable CS0618 // Type or member is obsolete
-                        RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('Producto registrado exitosamente.');</script>");
-#pragma warning restore CS0618 // Type or member is obsolete
-
-                        //}
-
-                    }
-                }
-                else
-                {
-#pragma warning disable CS0618 // Type or member is obsolete
-                    RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('Ingrese el precio del producto correctamente.');</script>");
-#pragma warning restore CS0618 // Type or member is obsolete
-                }
-            }
-            else
-            {
-#pragma warning disable CS0618 // Type or member is obsolete
-                RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('Ingrese la cantidad del producto correctamente.');</script>");
-#pragma warning restore CS0618 // Type or member is obsolete
-            }
-        }
-        else
-        {
-#pragma warning disable CS0618 // Type or member is obsolete
-            RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('Ingrese todos los datos.');</script>");
-#pragma warning restore CS0618 // Type or member is obsolete
-        }
+        ValidacionesCRUDProducto val = new ValidacionesCRUDProducto();
+        val.AgregarProducto(TB_ReferenciaProducto.Text, TB_Precio.Text, TB_Cantidad.Text, DL_Tallas.SelectedValue);
+        Response.Write("<script>window.alert('" + val.devuelvemensaje() + "';</script>");
+        GV_Productos.DataBind();
+        this.reiniciar();
     }
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -110,18 +42,10 @@ public partial class View_Tienda_CRUDProducto : System.Web.UI.Page
 
     protected void GV_Productos_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        Session["idproducto"] = null;
-        if (e.CommandName.Equals("Delete"))
-        {
-            DAOUsuario dAO = new DAOUsuario();
-            int id = Convert.ToInt32(e.CommandArgument);
-            dAO.eliminarProducto(id);
-        }
-        if (e.CommandName.Equals("Editar"))
-        {
-            Seleccionar_Producto(Convert.ToInt32(e.CommandArgument));
-            Session["idproducto"] = Convert.ToString(e.CommandArgument);
-        }
+        ValidacionesCRUDProducto validaciones = new ValidacionesCRUDProducto();
+        validaciones.RowCommand(e.CommandName, e.CommandArgument.ToString());
+        Session["idproducto"] = Convert.ToString(e.CommandArgument);
+        
 
     }
 
@@ -131,15 +55,15 @@ public partial class View_Tienda_CRUDProducto : System.Web.UI.Page
         Producto producto = new Producto();
         int refe = r;
         DataTable productos = dAO.verProductosEditar(refe);
-        if(productos != null) { 
-        foreach(DataRow row in productos.Rows)
-        {
-            producto.Referencia = Convert.ToString(row["referenciaproducto"]);
-            producto.Cantidad = Convert.ToInt64(row["cantidad"]);
-            producto.Talla = Convert.ToDouble(row["talla"]);
-            producto.Precio = Convert.ToDouble(row["precio"]);
-
-        }
+        if(productos != null)
+        { 
+            foreach(DataRow row in productos.Rows)
+            {
+               producto.Referencia = Convert.ToString(row["referenciaproducto"]);
+                producto.Cantidad = Convert.ToInt64(row["cantidad"]);
+                producto.Talla = Convert.ToDouble(row["talla"]);
+                producto.Precio = Convert.ToDouble(row["precio"]);
+            }
         }
         Session["compara"] = Convert.ToString(producto.Cantidad);
         TB_EditarReferencia.Text = producto.Referencia;
@@ -237,41 +161,12 @@ public partial class View_Tienda_CRUDProducto : System.Web.UI.Page
         B_Cancelar.Enabled = false;
     }
 
-    bool validarLlenoAgregar()
+    void reiniciar()
     {
-        if (TB_ReferenciaProducto.Text == "" || TB_Precio.Text == "" || TB_Cantidad.Text == "")
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    bool validarLlenoEditar()
-    {
-        if (TB_EditarReferencia.Text == "" || TB_EditarPrecio.Text == "" || TB_EditarCantidad.Text == "")
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    public bool validarNumeros(string num)
-    {
-        try
-        {
-            double x = Convert.ToDouble(num);
-            return true;
-        }
-        catch (Exception)
-        {
-            return false;
-        }
+        TB_ReferenciaProducto.Text = "";
+        TB_Precio.Text = "";
+        TB_Cantidad.Text = "";
+        DL_Tallas.SelectedIndex = 0;
     }
 
     protected void TB_EditarPrecio_TextChanged(object sender, EventArgs e)
